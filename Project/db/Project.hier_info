@@ -1,0 +1,47 @@
+|ALU1
+A => A~0.IN1
+B => B~0.IN1
+invert_A => invert_A~0.IN1
+invert_B => invert_B~0.IN1
+C_in => C_in~0.IN1
+Oper[0] => Oper[0]~1.IN1
+Oper[1] => Oper[1]~0.IN1
+Result <= Mux3:comb_11.port4
+C_out <= Full_Adder:comb_10.port4
+
+
+|ALU1|Mux2:comb_4
+A => C~0.DATAB
+B => C~0.DATAA
+Sel => C~0.OUTPUTSELECT
+C <= C~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU1|Mux2:comb_6
+A => C~0.DATAB
+B => C~0.DATAA
+Sel => C~0.OUTPUTSELECT
+C <= C~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU1|Full_Adder:comb_10
+A => Add0.IN1
+B => Add0.IN2
+Cin => Add1.IN4
+Sum <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU1|Mux3:comb_11
+A => Z~2.DATAB
+B => Z~0.DATAB
+C => Z~0.DATAA
+Oper[0] => Equal0.IN0
+Oper[0] => Equal1.IN0
+Oper[0] => Equal2.IN1
+Oper[1] => Equal0.IN1
+Oper[1] => Equal1.IN1
+Oper[1] => Equal2.IN0
+Z <= Z$latch.DB_MAX_OUTPUT_PORT_TYPE
+
+
